@@ -1,5 +1,5 @@
 /*
-Esta classe especifica um exemplo de programa em Java que imprime o valor dos atributos de um conjunto de objetos da classe Pessoa, instanciados dentro do método main().
+Esta classe especifica um exemplo de programa em Java que imprime o valor dos atributos de um conjunto de objetos da classe Pessoa, recebidos na entrada padrão por meio de arquivo (default: pessoas.in)
 */
 
 public class ImprimePessoa{
@@ -18,23 +18,7 @@ public class ImprimePessoa{
     
     public static void main(String ... args){
 
-       /*
-        Instâncias de objetos da classe Pessoa,
-       juntamente com a atribuição de valores
-       para os seus atributos por meio dos métodos
-       set<nomeDoAtributo>().
-       */
-       Pessoa pessoaJoao = new Pessoa();
-       pessoaJoao.setId(1L);
-       pessoaJoao.setNome("João");
-       pessoaJoao.setSobrenome("Couves");
-
-       Pessoa pessoaZeca = new Pessoa();
-       pessoaZeca.setId(2L);
-       pessoaZeca.setNome("Zeca");
-       pessoaZeca.setSobrenome("Neves");
-
-       /*
+         /*
        Instância da classe ImprimePessoa para poder utilizar o método imprimePessoa(). Qual seria a forma de utilizar o método imprimePessoa() sem uma instância da
        classe ImprimePessoa? Resposta: declarar o método como estático por meio da
        palavra reservada static (Veremos no tópico de encapsulamento os diferentes 
@@ -42,14 +26,24 @@ public class ImprimePessoa{
        */
        ImprimePessoa impressao = new ImprimePessoa();
 
-       impressao.imprimePessoa(pessoaJoao);
-       impressao.imprimePessoa(pessoaZeca);
 
-       /*
-        Caso o desejo fosse criar muitos objetos do tipo pessoa, e imprimir todos os
-        seus valores, qual a estratégia que poderíamos adotar com os conhecimentos 
-        que temos até o momento? Pergunta para pensar até o próximo BatEncontro, ou para quem prefere StarWars, até a próxima instrução do treinamento Padawan :-D.
-       */
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+
+
+        while(scanner.hasNext()){
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setId(scanner.nextLong());
+            //Sem espaços no nome e no sobrenome
+            //Tarefa para casa: Modificar essa implementação para suportar nomes compostos com espaços.
+            pessoa.setNome(scanner.next()); 
+            pessoa.setSobrenome(scanner.next());
+
+            impressao.imprimePessoa(pessoa);            
+        }
+
+        scanner.close();
        
     }
 
