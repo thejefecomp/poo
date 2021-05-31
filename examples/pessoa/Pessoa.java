@@ -5,17 +5,15 @@ definição dos atributos (por enquanto).
 */
 public class Pessoa{
 
-    Long id;
+    private Long id;
 
-    String nome;
+    private String nome;
 
-    String sobrenome;
-
+    private String sobrenome;
 
     public Long getId(){
 
         return this.id;
-
     }
 
     public void setId(Long id){
@@ -45,5 +43,3 @@ public class Pessoa{
         this.sobrenome = sobrenome;
     }
 }
-
-
