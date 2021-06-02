@@ -29,7 +29,7 @@ public class ImprimePessoa{
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
 
-
+        scanner.useDelimiter("\n"); //Solução da tarefa com visto em aula :-D.
 
         while(scanner.hasNext()){
 
