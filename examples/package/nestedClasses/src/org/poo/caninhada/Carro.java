@@ -107,4 +107,38 @@ public class Carro{
     public void setListaRodas(List<Roda> listaRodas){
         this.listaRodas = listaRodas;
     }
+
+    /*
+    TAREFA: Modifiquem o método toString() para permitir que a impressão do objeto do tipo Carro possa exibir a quantidade de rodas e os atributos específicos de cada uma das rodas, a eliminar o maior número de linhas redundantes possível.
+    */
+
+    @Override
+    public String toString(){
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Carro\n");
+        sb.append("Nome: ");
+        sb.append(this.nome);
+        sb.append("\n");
+        sb.append("Rodas\n");
+        
+        if (this.listaRodas != null && !this.listaRodas.isEmpty()){
+            
+            for(var roda : this.listaRodas){
+
+                sb.append("Número de Série: ");
+                sb.append(roda.numeroSerie);
+                sb.append("\n");
+                sb.append("Descrição: ");
+                sb.append(roda.descricao);
+                sb.append("\n");
+                sb.append("Tamanho do Aro: ");
+                sb.append(roda.tamanhoAro);
+                sb.append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
 }
