@@ -112,33 +112,119 @@ public class Carro{
     TAREFA: Modifiquem o método toString() para permitir que a impressão do objeto do tipo Carro possa exibir a quantidade de rodas e os atributos específicos de cada uma das rodas, a eliminar o maior número de linhas redundantes possível.
     */
 
+    /*
+    SOLUÇÃO: Implementar uma Classe Local (ao método) que resolve a impressão. A implementação leva muito pouco tempo para ser realizada (aprox. 15 minutos) e permite uma melhor manutenibilidade e extensibilidade do código-fonte.
+
+
+    DETALHES:
+
+    Linhas de código efetivas na implementação nova com pouca redundância(sem contabilizar comentários, espaços, e fechamento das chaves): 24 linhas;
+
+    Linhas de código efetivas na implementação anterior com muita redundância (sem contablizar comentários, espaços, e fechamento das chaves): 18 linhas;
+
+    No Caso da implementação anterior, cada vez que acrescentamos um novo atributo na classe Carro, ou na classe Roda, temos 3 linhas a serem adicionadas (por atributo), a aumentar a redundância do código-fonte.
+
+    No caso da nova implementação podemos acrescentar uma linha nova (caso desejado), ou simplesmente adicionar os atributos a uma das chamadas do método imprime() já efetuadas.
+
+    */
     @Override
     public String toString(){
 
-        StringBuilder sb = new StringBuilder();
+        /*
+        Esta classe auxilia na conversão de um objeto do tipo Carro para um
+        objeto to tipo String.
+        */
+        class CarroToString{
 
-        sb.append("Carro\n");
-        sb.append("Nome: ");
-        sb.append(this.nome);
-        sb.append("\n");
-        sb.append("Rodas\n");
-        
-        if (this.listaRodas != null && !this.listaRodas.isEmpty()){
-            
-            for(var roda : this.listaRodas){
+            private StringBuilder sbCarro = new StringBuilder();
 
-                sb.append("Número de Série: ");
-                sb.append(roda.numeroSerie);
-                sb.append("\n");
-                sb.append("Descrição: ");
-                sb.append(roda.descricao);
-                sb.append("\n");
-                sb.append("Tamanho do Aro: ");
-                sb.append(roda.tamanhoAro);
-                sb.append("\n");
+            /*
+            Este método imprime cada item em uma linha separada, a reconhecer
+            a presença de um cabeçalho de impressão.
+            */
+            public void imprime(String separadorLinha, String separadorCampo, boolean cabecalho,String ...valores){
+
+                for(int i = 0; i < valores.length; i++){
+
+                    sbCarro.append(valores[i]);
+
+                    if((cabecalho && i == 0) ||
+                       (cabecalho && (i % 2 == 0) ||
+                       i == valores.length - 1)){
+
+                        sbCarro.append(separadorLinha);
+                    }
+                    else if(!cabecalho && (i + 1) % 2 == 0){
+
+                        sbCarro.append(separadorLinha);
+
+                    }
+                    else{
+
+                        sbCarro.append(separadorCampo);
+                    }
+                }
+
             }
+
+            /*
+            Este método imprime uma instância da classe Carro, 
+            a ter incremento mínimo do número de linhas (caso desejado pelo desenvolvedor) de forma independente ao número de atributos nas classes Roda e Carro. 
+            */
+            public String imprime(Carro carro){
+
+                sbCarro.setLength(0);
+
+                this.imprime("\n", ": ", true,"Carro","Nome",carro.nome);
+
+                this.imprime("\n",": ", true, "Rodas", "Quantidade", Integer.valueOf(carro.listaRodas != null ? carro.listaRodas.size(): 0).toString());
+                if (carro.listaRodas != null && !carro.listaRodas.isEmpty()){
+
+                    for(var roda : carro.listaRodas){
+                        this.imprime("\n", ": ", false, "Número de Serie",roda.getNumeroSerie().toString(), "Descrição", roda.getDescricao(), "Tamanho do Aro", roda.getTamanhoAro().toString());
+                    }
+                }
+
+                return sbCarro.toString();
+            }
+
         }
 
-        return sb.toString();
+
+        CarroToString converteCarro = new CarroToString();
+
+        return converteCarro.imprime(this);
+
+
+    /*
+
+        Implementação Anterior (com muita redundância).
+        
+        StringBuilder sb = new StringBuilder();
+
+            sb.append("Carro\n");
+            sb.append("Nome: ");
+            sb.append(this.nome);
+            sb.append("\n");
+            sb.append("Rodas\n");
+            
+            if (this.listaRodas != null && !this.listaRodas.isEmpty()){
+                
+                for(var roda : this.listaRodas){
+
+                    sb.append("Número de Série: ");
+                    sb.append(roda.getNumeroSerie());
+                    sb.append("\n");
+                    sb.append("Descrição: ");
+                    sb.append(roda.getDescricao());
+                    sb.append("\n");
+                    sb.append("Tamanho do Aro: ");
+                    sb.append(roda.getTamanhoAro());
+                    sb.append("\n");
+                }
+            }
+
+            return sb.toString();
+        */
     }
 }
