@@ -24,6 +24,14 @@ public class Principal{
         
         carro.adicionaRoda(roda);
 
+        roda = carro.new Roda();
+
+        roda.setDescricao("Roda criada no main aro 13");
+        roda.setTamanhoAro(13);
+        roda.setNumeroSerie(1234568020L);
+        
+        carro.adicionaRoda(roda);
+
         System.out.println(carro);
         
     }
