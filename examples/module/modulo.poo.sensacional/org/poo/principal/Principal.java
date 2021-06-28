@@ -17,6 +17,10 @@ public class Principal{
 
         pessoa.setNome("Zequinha");
 
-        System.out.printf("Olá Módulo do %s!\n", pessoa.getNome());
+        System.out.printf("Olá Módulo do %s!\nDescrição: %s\n", pessoa.getNome(),pessoa.getDescricao());
+        /*LEMBRANÇA: O método getDesricao() é um método default implementado na interface org.poo.interfaces.entidade.IEntidade, interface esta que 
+        é concretizada pela classe org.poo.Entidade.Pessoa utilizada no método
+        main().
+        */
     }
 }
