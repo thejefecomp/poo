@@ -124,8 +124,11 @@ public abstract class Usuario extends Entidade{
 
 	public void setSenha(char[] senha){
 		
-		for(char charactere : senha){
-			charactere = 0;
+		if(this.senha != null){
+		
+			for(char charactere : this.senha){
+				charactere = 0;
+			}
 		}
 
 		this.senha = senha;
