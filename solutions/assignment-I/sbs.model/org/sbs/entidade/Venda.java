@@ -50,7 +50,7 @@ public class Venda extends Entidade{
 
 	private Float valorTotal;
 
-	public class ItemVenda{
+	public static class ItemVenda{
 
 		private Calcado calcado;
 
