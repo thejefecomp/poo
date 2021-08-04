@@ -3,6 +3,8 @@ package org.poo.armazenamento;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.function.Predicate;
+
 import org.poo.entidade.Anel;
 
 
@@ -17,6 +19,30 @@ public class ArmazenaAnel{
     Armazena a lista de anéis que foram adicionados por meio de um dos métodos adicionaAnel() presente nesta classe. Por agora esta lista pode ser definida como um atributo de ArmazenaAnel, já que no contexto da disciplina somente falou-se de forma incipiente sobre Padrões de Projeto. Entretanto, todo o armazenamento e código-fonte necessário para manipulação dos dados fica, usualmente, definido de outra forma.
     */
     private List<Anel> listaAnel;
+
+
+    /*
+       Este método retorna a quantidade de elementos
+       removidos da lista interna de anéis, baseado
+       em uma condição estabelecida pelo predicado 
+       em questão.
+    */
+    private Integer removeIf(Predicate<Anel> condicao){
+
+        int tamanhoAnterior = this.listaAnel.size();
+
+        this.listaAnel.removeIf(condicao);
+
+        return tamanhoAnterior - this.listaAnel.size();
+
+        /*
+           Implementação alternativa com operador ternário:
+
+           int tamanhoAnterior = this.listaAnel.size();
+
+           return this.listaAnel.removeIf(condicao) ? tamanhoAnterior - this.listaAnel.size() : 0;
+        */
+    }
 
     /*
     Construtor default (sem parâmetros).
@@ -64,27 +90,16 @@ public class ArmazenaAnel{
     */
     public boolean removeAnel(Long id){
 
-        /*
-        Por agora vamos realizar a implementação com um laço simples. Entretanto, como descrito no comentário anterior, reflitam a respeito de uma solução
-        alternativa...
-        */
+        
+        Predicate<Anel> removePeloId = anel -> anel.getId().equals(id); //Alguma característica que identifica o critério de remoção;
 
-        Anel anelParaRemover = null;
-        for(Anel anel: this.listaAnel){
-            
-            if(anel.getId() == id){
-                anelParaRemover = anel;
-                break;
-            }
-        }
+        return this.removeIf(removePeloId) > 0;
 
         /*
+          Implementação alternativa a invocar diretamente o removeIf da lista.
 
-        Veja a documentação do método remove() da interface java.util.List,
-        e da classe java.util.ArrayList.
-
+          return this.listaAnel.removeIf(removePeloId);
         */
-        return this.listaAnel.remove(anelParaRemover);
     }
 
 /*
@@ -104,8 +119,9 @@ org.poo.armazenamento.ArmazenaAnel comporta-se.
     */
     public Integer removeAnel(String nome){
 
-        //PARA IMPLEMENTAR
-        return 0;
+         Predicate<Anel> removePeloNome = anel -> anel.getNome().equals(nome);
+
+        return this.removeIf(removePeloNome);
     }
 
     /*
@@ -113,8 +129,20 @@ org.poo.armazenamento.ArmazenaAnel comporta-se.
     Retorna o número de anéis que foram encontrados com o referido diametro, e removidos do armazenamento; retorna zero (0), caso nenhum anel com o referido diâmetro seja removido.
     */
     public Integer removeAnel(Integer diametro){
+ 
+        Predicate<Anel> removePeloDiametro = anel -> anel.getDiametro().equals(diametro);
+        
+        return this.removeIf(removePeloDiametro);
+    }
 
-        //PARA IMPLEMENTAR
-        return 0;
+    public static void main(String ...args){
+
+        ArmazenaAnel storage = new ArmazenaAnel();
+
+        storage.adicionaAnel(1L,"Pipoca", 10);
+        storage.adicionaAnel(2L,"Peso", 15);
+        storage.adicionaAnel(3L,"Pipoca", 13);
+
+        System.out.printf("Número de anéis removidos: %d\n",storage.removeAnel("Pipoca"));
     }
 }
