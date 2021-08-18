@@ -73,7 +73,6 @@ public class MemoryDatabaseImpl implements Database{
 				
 			} catch (ClassCastException | ClassNotFoundException e){
 				
-				e.printStackTrace();
 				result = false;
 			}
 			finally{
