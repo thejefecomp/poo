@@ -1,2 +1,2 @@
 # poo
-This repository has been created to support teaching activities of a course named Object Oriented Programming (Programação Orientada a Objetos in portuguese). The aforementioned course is given by myself at State University of Santa Catarina (UDESC), Joinville-SC, Brazil.
+This repository has been created to support teaching activities of a course named Object Oriented Programming (Programação Orientada a Objetos in portuguese). The aforementioned course has been given by myself at State University of Santa Catarina (UDESC), Joinville-SC, Brazil. Currently, the course material is managed by NeartWord, my personal company linked to the NeartWord project (https://www.neartword.com).
